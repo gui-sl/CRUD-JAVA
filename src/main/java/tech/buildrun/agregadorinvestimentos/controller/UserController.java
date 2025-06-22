@@ -36,6 +36,13 @@ public class UserController {
         }
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<User> getUserByUsername(@RequestParam String username) {
+        return userService.getUserByUsername(username)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @GetMapping
     public ResponseEntity<List<User>> listUsers() {
         var users = userService.listUsers();

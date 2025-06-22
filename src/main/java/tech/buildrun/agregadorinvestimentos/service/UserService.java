@@ -37,20 +37,25 @@ public class UserService {
     }
 
     public Optional<User> getUserById(String userId){
-
         return userRepository.findById(UUID.fromString(userId));
+
     }
 
     public List<User> listUsers() {
         return userRepository.findAll();
     }
 
+    public Optional<User> getUserByUsername(String username) {
+       return userRepository.findByUsername(username);
+    }
+
     public void updateUserById(String userId,
                                UpdateUserDto updateUserDto) {
 
         var id = UUID.fromString(userId);
-
+        System.out.println(id);
         var userEntity = userRepository.findById(id);
+
 
         if (userEntity.isPresent()) {
             var user = userEntity.get();
